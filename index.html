@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="site-title">ধনবাড়ী মতাদর্শ - তথ্যভান্ডার ও নাগরিক সেবা</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .admin-hidden { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Top Bar -->
+    <div id="top-bar" class="bg-emerald-800 text-emerald-50 text-xs py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span><i class="fa-solid fa-location-dot mr-1"></i> ধনবাড়ী, টাঙ্গাইল, বাংলাদেশ</span>
+                <span><i class="fa-solid fa-envelope mr-1"></i> support@dhanbarimotadorsho.com</span>
+            </div>
+            <div>
+                <span id="topbar-ticker" class="font-medium">স্বাগতম! ধনবাড়ী উপজেলার অফিসিয়াল তথ্যভান্ডারে।</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div id="nav-logo-icon" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xl font-bold shadow-inner">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <div>
+                        <span id="nav-brand-title" class="text-lg sm:text-xl font-bold text-emerald-800 block leading-tight">ধনবাড়ী মতাদর্শ</span>
+                        <span id="nav-brand-subtitle" class="text-xs text-slate-500 block">উপজেলা তথ্যভান্ডার ও নাগরিক সেবা</span>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="text-slate-600 hover:text-emerald-600 font-medium transition">হোম</a>
+                    <a href="#notices" class="text-slate-600 hover:text-emerald-600 font-medium transition">নোটিশ বোর্ড</a>
+                    <a href="#services" class="text-slate-600 hover:text-emerald-600 font-medium transition">সেবাসমূহ</a>
+                    <a href="#blood-bank" class="text-slate-600 hover:text-emerald-600 font-medium transition">ব্লাড ব্যাংক</a>
+                    <a href="#transport" class="text-slate-600 hover:text-emerald-600 font-medium transition">বাস রিভিউ</a>
+                    <a href="#donate" class="text-slate-600 hover:text-emerald-600 font-medium transition">ডোনেশন</a>
+                    <button onclick="openAdminLogin()" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-lock text-xs"></i> এডমিন প্যানেল
+                    </button>
+                </div>
+
+                <div class="flex md:hidden items-center">
+                    <button onclick="toggleMobileMenu()" class="text-slate-700 hover:text-emerald-600 text-xl p-2">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 py-3 space-y-2 shadow-lg">
+            <a href="#home" class="block py-2 text-slate-600 hover:text-emerald-600 font-medium">হোম</a>
+            <a href="#notices" class="block py-2 text-slate-600 hover:text-emerald-600 font-medium">নোটিশ বোর্ড</a>
+            <a href="#services" class="block py-2 text-slate-600 hover:text-emerald-600 font-medium">সেবাসমূহ</a>
+            <a href="#blood-bank" class="block py-2 text-slate-600 hover:text-emerald-600 font-medium">ব্লাড ব্যাংক</a>
+            <a href="#transport" class="block py-2 text-slate-600 hover:text-emerald-600 font-medium">বাস রিভিউ</a>
+            <a href="#donate" class="block py-2 text-slate-600 hover:text-emerald-600 font-medium">ডোনেশন</a>
+            <button onclick="openAdminLogin()" class="w-full text-left py-2 text-slate-900 font-bold flex items-center gap-2">
+                <i class="fa-solid fa-lock text-xs"></i> এডমিন প্যানেল
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 text-white py-16 px-4 text-center relative overflow-hidden shadow-lg">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto relative z-10 space-y-4">
+            <span id="hero-badge" class="bg-emerald-700/80 text-emerald-100 text-xs px-3 py-1.5 rounded-full uppercase tracking-wider font-semibold border border-emerald-600">ডিজিটাল ধনবাড়ী গড়ি</span>
+            <h1 id="hero-title" class="text-3xl sm:text-5xl font-extrabold tracking-tight">ধনবাড়ী উপজেলা তথ্যভান্ডার</h1>
+            <p id="hero-subtitle" class="text-base sm:text-xl text-emerald-100 max-w-2xl mx-auto font-light">নাগরিক সেবা, জরুরি তথ্য, শিক্ষা, স্বাস্থ্য, বাস রিভিউ এবং সামাজিক কার্যক্রম এখন এক প্ল্যাটফর্মে।</p>
+            <div class="pt-4 flex flex-wrap justify-center gap-3">
+                <a href="#notices" class="bg-white text-emerald-900 hover:bg-emerald-50 px-6 py-3 rounded-xl font-bold shadow transition">আজকের নোটিশ দেখুন</a>
+                <a href="#services" class="bg-emerald-700/60 hover:bg-emerald-700 text-white border border-emerald-500 px-6 py-3 rounded-xl font-bold transition">সকল সেবা সমূহ</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16 flex-grow w-full">
+
+        <!-- Notice Board Section -->
+        <section id="notices" class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-bullhorn text-emerald-600"></i> উপজেলা নোটিশ বোর্ড ও খবরাখবর
+                    </h2>
+                    <p class="text-sm text-slate-500">প্রতিদিনের জরুরি ঘোষণা, বিজ্ঞপ্তি এবং আপডেট খবর।</p>
+                </div>
+            </div>
+
+            <div id="notice-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Notices will be injected dynamically -->
+            </div>
+        </section>
+
+        <!-- Quick Services Grid -->
+        <section id="services">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2">জরুরি ও নাগরিক সেবা</h2>
+                <p class="text-slate-500">এক ক্লিকেই জেনে নিন ধনবাড়ীর প্রয়োজনীয় সকল সেবা ও তথ্যাবলী।</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1: Emergency -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-rose-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-phone-volume"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1">জরুরি হটলাইন</h3>
+                    <p class="text-sm text-slate-500 mb-4">ফায়ার সার্ভিস, থানা, অ্যাম্বুলেন্স ও বিদ্যুৎ অফিস কন্টাক্ট।</p>
+                    <button onclick="openModal('emergencyModal')" class="text-rose-600 hover:text-rose-700 font-semibold text-sm flex items-center gap-1">নম্বর দেখুন <i class="fa-solid fa-arrow-right text-xs"></i></button>
+                </div>
+
+                <!-- Service 2: Education -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1">স্কুল ও কলেজ</h3>
+                    <p class="text-sm text-slate-500 mb-4">ধনবাড়ীর বিখ্যাত শিক্ষা প্রতিষ্ঠান ও শিক্ষক ডিরেক্টরি।</p>
+                    <button onclick="openModal('eduModal')" class="text-blue-600 hover:text-blue-700 font-semibold text-sm flex items-center gap-1">তালিকায় যান <i class="fa-solid fa-arrow-right text-xs"></i></button>
+                </div>
+
+                <!-- Service 3: Administration -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-amber-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1">প্রশাসনিক অফিস</h3>
+                    <p class="text-sm text-slate-500 mb-4">ইউএনও অফিস, ভূমি অফিস ও ইউনিয়ন পরিষদ পরিচিতি।</p>
+                    <button onclick="openModal('adminModal')" class="text-amber-600 hover:text-amber-700 font-semibold text-sm flex items-center gap-1">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right text-xs"></i></button>
+                </div>
+
+                <!-- Service 4: Tourism -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition group">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-1">দর্শনীয় স্থান</h3>
+                    <p class="text-sm text-slate-500 mb-4">ধনবাড়ী জমিদার বাড়ি ও ঐতিহাসিক মসজিদ পরিচিতি।</p>
+                    <button onclick="openModal('tourModal')" class="text-emerald-600 hover:text-emerald-700 font-semibold text-sm flex items-center gap-1">ঘুরে আসুন <i class="fa-solid fa-arrow-right text-xs"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blood Bank Section -->
+        <section id="blood-bank" class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-droplet text-red-600"></i> স্বেচ্ছাসেবী ব্লাড ব্যাংক
+                    </h2>
+                    <p class="text-sm text-slate-500">জরুরি মুহূর্তে রক্তের প্রয়োজনে ধনবাড়ীর ডোনারদের সাথে যোগাযোগ করুন।</p>
+                </div>
+                <button onclick="openModal('addDonorModal')" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow transition flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> ডোনার হিসেবে নাম রেজিস্ট্রি করুন
+                </button>
+            </div>
+
+            <!-- Filter by Blood Group -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button onclick="filterBlood('ALL')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-red-600 text-white transition">সকল</button>
+                <button onclick="filterBlood('A+')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">A+</button>
+                <button onclick="filterBlood('B+')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">B+</button>
+                <button onclick="filterBlood('O+')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">O+</button>
+                <button onclick="filterBlood('AB+')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">AB+</button>
+                <button onclick="filterBlood('A-')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">A-</button>
+                <button onclick="filterBlood('B-')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">B-</button>
+                <button onclick="filterBlood('O-')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">O-</button>
+                <button onclick="filterBlood('AB-')" class="blood-filter-btn px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">AB-</button>
+            </div>
+
+            <div id="blood-donor-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Donor cards injected here -->
+            </div>
+        </section>
+
+        <!-- Bus Transport & Review Section -->
+        <section id="transport" class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-bus text-teal-600"></i> বাস পরিবহন ও যাত্রী রিভিউ
+                    </h2>
+                    <p class="text-sm text-slate-500">ধনবাড়ী থেকে যাতায়াতকারী বাস সার্ভিসের মান ও সময়সূচি জানুন।</p>
+                </div>
+                <button onclick="openModal('addBusReviewModal')" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow transition flex items-center gap-2">
+                    <i class="fa-solid fa-star"></i> বাস রিভিউ বা অভিজ্ঞতা লিখুন
+                </button>
+            </div>
+
+            <div id="bus-review-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Bus reviews injected here -->
+            </div>
+        </section>
+
+        <!-- Donation & Community Support -->
+        <section id="donate" class="bg-gradient-to-br from-emerald-800 to-teal-900 rounded-2xl shadow-lg text-white p-6 sm:p-10">
+            <div class="max-w-3xl mx-auto text-center space-y-4">
+                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-2 backdrop-blur">
+                    <i class="fa-solid fa-hand-holding-heart text-emerald-300"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold">জনকল্যাণ ও সহায়তা ফান্ড</h2>
+                <p class="text-emerald-100 text-sm sm:text-base font-light">ধনবাড়ীর দুস্থ ও অসহায় মানুষের চিকিৎসা বা শিক্ষায় সহায়তার জন্য আমাদের এই উদ্যোগ। আপনার ক্ষুদ্র অবদান বড় পরিবর্তন আনতে পারে।</p>
+                <div class="pt-4 bg-white/10 p-6 rounded-xl backdrop-blur border border-white/10 text-left space-y-3">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                        <span class="text-emerald-200">বিকাশ/নগদ (পার্সোনাল):</span>
+                        <span class="font-mono font-bold text-lg">01700-000000</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-emerald-200">ব্যাংক অ্যাকাউন্ট:</span>
+                        <span class="font-mono font-bold">ধনবাড়ী মতাদর্শ কল্যাণ ট্রাস্ট</span>
+                    </div>
+                </div>
+                <p class="text-xs text-emerald-300">*টাকা পাঠিয়ে এডমিন প্যানেলে যোগাযোগ করলে নাম প্রকাশ করা হবে।</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <span id="footer-brand-title" class="text-white font-bold text-lg block">ধনবাড়ী মতাদর্শ</span>
+                <p class="text-xs text-slate-500 mt-1">সর্বস্বত্ব সংরক্ষিত © ২০২৬ ধনবাড়ী উপজেলা তথ্যভান্ডার।</p>
+            </div>
+            <div class="flex items-center gap-4 text-sm">
+                <a href="#home" class="hover:text-white transition">হোম</a>
+                <a href="#notices" class="hover:text-white transition">নোটিশ</a>
+                <a href="#services" class="hover:text-white transition">সেবা</a>
+                <button onclick="openAdminLogin()" class="text-emerald-400 hover:text-emerald-300 font-medium"><i class="fa-solid fa-lock text-xs mr-1"></i> এডমিন পোর্টাল</button>
+            </div>
+            <div>
+                <p class="text-xs text-slate-500">ডেভেলপার: <span class="text-emerald-400 font-semibold">নুরিয়া হাসান</span></p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ================= MODALS & POPUPS ================= -->
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-phone-volume text-rose-600"></i> জরুরি হটলাইন নম্বর</h3>
+                <button onclick="closeModal('emergencyModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="p-3 bg-slate-50 rounded-xl border flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-slate-800">ধনবাড়ী থানা পুলিশ</h4>
+                        <p class="text-xs text-slate-500">ওসি / ডিউটি অফিসার</p>
+                    </div>
+                    <a href="tel:01700000000" class="bg-rose-50 text-rose-600 font-mono font-bold px-3 py-1.5 rounded-lg text-sm hover:bg-rose-600 hover:text-white transition"><i class="fa-solid fa-phone mr-1"></i> কল করুন</a>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-slate-800">ফায়ার সার্ভিস ও সিভিল ডিফেন্স</h4>
+                        <p class="text-xs text-slate-500">জরুরি উদ্ধার সেবা</p>
+                    </div>
+                    <a href="tel:01700000000" class="bg-rose-50 text-rose-600 font-mono font-bold px-3 py-1.5 rounded-lg text-sm hover:bg-rose-600 hover:text-white transition"><i class="fa-solid fa-phone mr-1"></i> কল করুন</a>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-slate-800">উপজেলা স্বাস্থ্য কমপ্লেক্স</h4>
+                        <p class="text-xs text-slate-500">অ্যাম্বুলেন্স ও ইমার্জেন্সি</p>
+                    </div>
+                    <a href="tel:01700000000" class="bg-rose-50 text-rose-600 font-mono font-bold px-3 py-1.5 rounded-lg text-sm hover:bg-rose-600 hover:text-white transition"><i class="fa-solid fa-phone mr-1"></i> কল করুন</a>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border flex justify-between items-center">
+                    <div>
+                        <h4 class="font-bold text-slate-800">পল্লী বিদ্যুৎ অভিযোগ কেন্দ্র</h4>
+                        <p class="text-xs text-slate-500">বিদ্যুৎ বিভ্রাট ও অভিযোগ</p>
+                    </div>
+                    <a href="tel:01700000000" class="bg-rose-50 text-rose-600 font-mono font-bold px-3 py-1.5 rounded-lg text-sm hover:bg-rose-600 hover:text-white transition"><i class="fa-solid fa-phone mr-1"></i> কল করুন</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education Modal -->
+    <div id="eduModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-blue-600"></i> শিক্ষা প্রতিষ্ঠান তালিকা</h3>
+                <button onclick="closeModal('eduModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100">
+                    <h4 class="font-bold text-slate-800">ধনবাড়ী সরকারি কলেজ</h4>
+                    <p class="text-xs text-slate-500">প্রতিষ্ঠিত: ১৯৬s | উচ্চ মাধ্যমিক ও স্নাতক পর্যায়</p>
+                </div>
+                <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100">
+                    <h4 class="font-bold text-slate-800">ধনবাড়ী নওয়াব ইনস্টিটিউশন</h4>
+                    <p class="text-xs text-slate-500">ঐতিহ্যবাহী মাধ্যমিক বিদ্যালয়</p>
+                </div>
+                <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100">
+                    <h4 class="font-bold text-slate-800">ধনবাড়ী পাইলট বালিকা উচ্চ বিদ্যালয়</h4>
+                    <p class="text-xs text-slate-500">মাধ্যমিক শিক্ষা প্রতিষ্ঠান</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-building-columns text-amber-600"></i> উপজেলা প্রশাসনিক পরিচিতি</h3>
+                <button onclick="closeModal('adminModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100">
+                    <h4 class="font-bold text-slate-800">উপজেলা নির্বাহী অফিসার (ইউএনও)</h4>
+                    <p class="text-xs text-slate-500">ধনবাড়ী, টাঙ্গাইল। সার্বিক প্রশাসনিক কার্যক্রম।</p>
+                </div>
+                <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100">
+                    <h4 class="font-bold text-slate-800">সহকারী কমিশনার (ভূমি)</h4>
+                    <p class="text-xs text-slate-500">ভূমি সংক্রান্ত সেবামূলক দপ্তর</p>
+                </div>
+                <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100">
+                    <h4 class="font-bold text-slate-800">ইউনিয়ন পরিষদসমূহ</h4>
+                    <p class="text-xs text-slate-500">পাইস্কা, যদুনাথপুর, ধনবাড়ী সদর, ধোপাখালি, বীরতারা, বানিাজান</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tourism Modal -->
+    <div id="tourModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-landmark text-emerald-600"></i> দর্শনীয় স্থান</h3>
+                <button onclick="closeModal('tourModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
+                    <h4 class="font-bold text-slate-800">ধনবাড়ী নওয়াব প্যালেস (জমিদার বাড়ি)</h4>
+                    <p class="text-xs text-slate-500">প্রায় ৪০০ বছরের পুরোনো ঐতিহাসিক জমিদার বাড়ি ও রাজপ্রাসাদ, যা এখন রিসোর্ট হিসেবে ব্যবহৃত হয়।</p>
+                </div>
+                <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
+                    <h4 class="font-bold text-slate-800">ঐতিহাসিক ৭ গম্বুজ মসজিদ</h4>
+                    <p class="text-xs text-slate-500">জমিদার আমলের অনন্য স্থাপত্য শৈলীতে নির্মিত ঐতিহাসিক মসজিদ।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Blood Donor Modal -->
+    <div id="addDonorModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-800">স্বেচ্ছাসেবী রক্তদাতা নিবন্ধন</h3>
+                <button onclick="closeModal('addDonorModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="donorForm" onsubmit="handleDonorSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">আপনার নাম</label>
+                    <input type="text" id="donorName" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="যেমন: মো: রাশেদ">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ব্লাড গ্রুপ</label>
+                        <select id="donorGroup" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                            <option value="A+">A+</option>
+                            <option value="B+">B+</option>
+                            <option value="O+">O+</option>
+                            <option value="AB+">AB+</option>
+                            <option value="A-">A-</option>
+                            <option value="B-">B-</option>
+                            <option value="O-">O-</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">মোবাইল নম্বর</label>
+                        <input type="text" id="donorPhone" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="017XXXXXXXX">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">এলাকা / ইউনিয়ন</label>
+                    <input type="text" id="donorArea" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="যেমন: ধনবাড়ী সদর">
+                </div>
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded-xl transition shadow">নিবন্ধন সম্পন্ন করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Bus Review Modal -->
+    <div id="addBusReviewModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-800">বাস সার্ভিস রিভিউ লিখুন</h3>
+                <button onclick="closeModal('addBusReviewModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="busForm" onsubmit="handleBusSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">বাসের নাম / রুট</label>
+                    <input type="text" id="busName" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="যেমন: বিনিময় পরিবহন (ধনবাড়ী-ঢাকা)">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">রেটিং (১ থেকে ৫)</label>
+                        <select id="busRating" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+                            <option value="5">⭐⭐⭐⭐⭐ (৫/৫)</option>
+                            <option value="4">⭐⭐⭐⭐ (৪/৫)</option>
+                            <option value="3">⭐⭐⭐ (৩/৫)</option>
+                            <option value="2">⭐⭐ (২/৫)</option>
+                            <option value="1">⭐ (১/৫)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">আপনার নাম</label>
+                        <input type="text" id="reviewerName" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="যাত্রীর নাম">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">অভিজ্ঞতা ও মন্তব্য</label>
+                    <textarea id="busComment" required rows="3" class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="বাসের সার্ভিস, ভাড়া বা সময় ঠিক থাকে কিনা লিখুন..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 rounded-xl transition shadow">রিভিউ সাবমিট করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-lock text-slate-900"></i> এডমিন লগইন</h3>
+                <button onclick="closeModal('adminLoginModal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="verifyAdmin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">পাসওয়ার্ড দিন</label>
+                    <input type="password" id="adminPasswordInput" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" placeholder="পাসওয়ার্ড লিখুন">
+                </div>
+                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl transition shadow">প্রবেশ করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FULL ADMIN & DEVELOPER DASHBOARD (Secured Modal) -->
+    <div id="adminDashboardModal" class="hidden fixed inset-0 bg-slate-900/90 z-50 overflow-y-auto p-4 sm:p-6">
+        <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden my-8">
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold flex items-center gap-2"><i class="fa-solid fa-gauge-high text-emerald-400"></i> মাস্টার এডমিন ও ডেভেলপার প্যানেল</h2>
+                    <p class="text-xs text-slate-400">ওয়েবসাইটের A to Z কাস্টমাইজেশন ও নোটিশ প্রকাশ প্যানেল।</p>
+                </div>
+                <button onclick="closeAdminDashboard()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-bold"><i class="fa-solid fa-xmark mr-1"></i> বন্ধ করুন</button>
+            </div>
+
+            <div class="p-6 space-y-8 max-h-[80vh] overflow-y-auto">
+                <!-- Tab 1: Site Branding & Info Edit -->
+                <div class="bg-slate-50 p-6 rounded-2xl border">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-pen-to-square text-emerald-600"></i> নাম, লোগো ও ব্র্যান্ডিং পরিবর্তন</h3>
+                    <form onsubmit="saveBranding(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">ওয়েবসাইটের নাম</label>
+                            <input type="text" id="editSiteTitle" class="w-full px-3 py-2 border rounded-lg text-sm bg-white" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">ট্যাগলাইন/উপবাবে</label>
+                            <input type="text" id="editSiteSubtitle" class="w-full px-3 py-2 border rounded-lg text-sm bg-white" required>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">টপবার ঘোষণা / টিক্যার টেক্সট</label>
+                            <input type="text" id="editTopTicker" class="w-full px-3 py-2 border rounded-lg text-sm bg-white" required>
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition">ব্র্যান্ডিং সেভ করুন</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tab 2: Publish Notice -->
+                <div class="bg-slate-50 p-6 rounded-2xl border">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-bullhorn text-emerald-600"></i> নতুন নোটিশ বা খবর পাবলিশ করুন</h3>
+                    <form onsubmit="publishNotice(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">নোটিশের শিরোনাম</label>
+                                <input type="text" id="noticeTitle" required class="w-full px-3 py-2 border rounded-lg text-sm bg-white" placeholder="যেমন: বিনামূল্যে স্বাস্থ্য ক্যাম্প সংক্রান্ত">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">তারিখ</label>
+                                <input type="text" id="noticeDate" required class="w-full px-3 py-2 border rounded-lg text-sm bg-white" placeholder="যেমন: ২৬ অক্টোবর ২০২৬">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">বিস্তারিত বিবরণ</label>
+                            <textarea id="noticeDesc" required rows="3" class="w-full px-3 py-2 border rounded-lg text-sm bg-white" placeholder="নোটিশের বিস্তারিত বর্ণনা এখানে লিখুন..."></textarea>
+                        </div>
+                        <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition">নোটিশ পাবলিশ করুন</button>
+                    </form>
+                </div>
+
+                <!-- Tab 3: Manage / Delete Notices & Reviews -->
+                <div class="bg-slate-50 p-6 rounded-2xl border space-y-4">
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-trash-can text-rose-600"></i> প্রকাশিত নোটিশ ও রিভিউ ম্যানেজমেন্ট</h3>
+                    <div id="admin-management-list" class="space-y-2">
+                        <!-- Dynamic items loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript Functionality -->
+    <script>
+        // Default LocalStorage Data Initialization
+        const defaultNotices = [
+            { id: 1, title: 'উপজেলা পরিষদের মাসিক সভা', date: '২৫ অক্টোবর ২০২৬', desc: 'আগামীকাল সকাল ১০টায় উপজেলা পরিষদের হলরুমে মাসিক সাধারণ সভা অনুষ্ঠিত হবে।' },
+            { id: 2, title: 'কৃষকদের মাঝে সার ও বীজ বিতরণ', date: '২৪ অক্টোবর ২০২৬', desc: 'উপজেলা কৃষি অফিস চত্বরে ধনবাড়ীর নিবন্ধিত কৃষকদের মধ্যে বিনামূল্যে প্রণোদনার সার বিতরণ করা হবে।' },
+            { id: 3, title: 'বিনামূল্যে চক্ষু ক্যাম্প அறிவிப்பு', date: '২২ অক্টোবর ২০২৬', desc: 'ধনবাড়ী স্বাস্থ্য কমপ্লেক্স প্রাঙ্গণে আগামী শুক্রবার দিনব্যাপী ফ্রি আই ক্যাম্প অনুষ্ঠিত হবে।' }
+        ];
+
+        const defaultDonors = [
+            { id: 1, name: 'মো: আল-আমিন', group: 'A+', phone: '01711-123456', area: 'ধনবাড়ী সদর' },
+            { id: 2, name: 'রিফাত আহমেদ', group: 'B+', phone: '01822-234567', area: 'পাইস্কা ইউনিয়ন' },
+            { id: 3, name: 'হাসান মাহমুদ', group: 'O+', phone: '01933-345678', area: 'যদুনাথপুর' },
+            { id: 4, name: 'নাজমুল ইসলাম', group: 'AB+', phone: '01544-456789', area: 'বীরতারা' }
+        ];
+
+        const defaultBusReviews = [
+            { id: 1, bus: 'বিনিময় পরিবহন (ঢাকা-ধনবাড়ী)', rating: 5, user: 'সোহাগ রানা', comment: 'বাসের সার্ভিস খুব ভালো, সময়মতো ছাড়ে এবং ড্রাইভারদের ব্যবহার চমৎকার।' },
+            { id: 2, bus: 'দ্রুতগামী পরিবহন', rating: 4, user: 'তানভীর হাসান', comment: 'ভাড়া তুলনামূলক নায্য, তবে সিটগুলো আরও একটু আরামদায়ক হতে পারত।' }
+        ];
+
+        // Load from LocalStorage or Defaults
+        let notices = JSON.parse(localStorage.getItem('dhanbari_notices')) || defaultNotices;
+        let donors = JSON.parse(localStorage.getItem('dhanbari_donors')) || defaultDonors;
+        let busReviews = JSON.parse(localStorage.getItem('dhanbari_bus_reviews')) || defaultBusReviews;
+        let siteBranding = JSON.parse(localStorage.getItem('dhanbari_branding')) || {
+            title: 'ধনবাড়ী মতাদর্শ - তথ্যভান্ডার ও নাগরিক সেবা',
+            brandTitle: 'ধনবাড়ী মতাদর্শ',
+            brandSubtitle: 'উপজেলা তথ্যভান্ডার ও নাগরিক সেবা',
+            ticker: 'স্বাগতম! ধনবাড়ী উপজেলার অফিসিয়াল তথ্যভান্ডারে। যেকোনো সেবার জন্য যোগাযোগ করুন।'
+        };
+
+        // Initialize App on Load
+        window.onload = function() {
+            applyBranding();
+            renderNotices();
+            renderDonors('ALL');
+            renderBusReviews();
+        };
+
+        // Apply Branding
+        function applyBranding() {
+            document.getElementById('site-title').innerText = siteBranding.title;
+            document.getElementById('nav-brand-title').innerText = siteBranding.brandTitle;
+            document.getElementById('nav-brand-subtitle').innerText = siteBranding.brandSubtitle;
+            document.getElementById('topbar-ticker').innerText = siteBranding.ticker;
+            document.getElementById('footer-brand-title').innerText = siteBranding.brandTitle;
+        }
+
+        // Render Notices
+        function renderNotices() {
+            const container = document.getElementById('notice-container');
+            container.innerHTML = '';
+            notices.forEach(n => {
+                container.innerHTML += `
+                    <div class="bg-slate-50 border border-slate-100 p-5 rounded-2xl flex flex-col justify-between hover:border-emerald-200 transition">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md"><i class="fa-regular fa-calendar mr-1"></i> ${n.date}</span>
+                            <h3 class="text-lg font-bold text-slate-800 mt-3 mb-2">${n.title}</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">${n.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Render Donors
+        function renderDonors(filterGroup) {
+            const container = document.getElementById('blood-donor-list');
+            container.innerHTML = '';
+            let filtered = donors;
+            if(filterGroup !== 'ALL') {
+                filtered = donors.filter(d => d.group === filterGroup);
+            }
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<p class="text-slate-500 text-sm col-span-3 text-center py-6">এই গ্রুপে কোনো রক্তদাতা পাওয়া যায়নি।</p>`;
+                return;
+            }
+
+            filtered.forEach(d => {
+                container.innerHTML += `
+                    <div class="bg-slate-50 border p-4 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl font-extrabold flex items-center justify-center text-lg shadow-inner">
+                                ${d.group}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">${d.name}</h4>
+                                <p class="text-xs text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> ${d.area}</p>
+                            </div>
+                        </div>
+                        <a href="tel:${d.phone}" class="bg-red-600 text-white px-3 py-2 rounded-lg text-xs font-bold shadow hover:bg-red-700 transition"><i class="fa-solid fa-phone mr-1"></i> কল</a>
+                    </div>
+                `;
+            });
+        }
+
+        function filterBlood(group) {
+            document.querySelectorAll('.blood-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-red-600', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+            event.target.classList.remove('bg-slate-100', 'text-slate-700');
+            event.target.classList.add('bg-red-600', 'text-white');
+            renderDonors(group);
+        }
+
+        // Render Bus Reviews
+        function renderBusReviews() {
+            const container = document.getElementById('bus-review-list');
+            container.innerHTML = '';
+            busReviews.forEach(b => {
+                let stars = '⭐'.repeat(b.rating);
+                container.innerHTML += `
+                    <div class="bg-slate-50 border p-5 rounded-xl space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-bold text-slate-800"><i class="fa-solid fa-bus text-teal-600 mr-1"></i> ${b.bus}</h4>
+                            <span class="text-xs">${stars}</span>
+                        </div>
+                        <p class="text-sm text-slate-600">"${b.comment}"</p>
+                        <p class="text-xs text-slate-400 text-right">— ${b.user}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Modal Handlers
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+
+        // Form Submissions
+        function handleDonorSubmit(e) {
+            e.preventDefault();
+            const newDonor = {
+                id: Date.now(),
+                name: document.getElementById('donorName').value,
+                group: document.getElementById('donorGroup').value,
+                phone: document.getElementById('donorPhone').value,
+                area: document.getElementById('donorArea').value
+            };
+            donors.unshift(newDonor);
+            localStorage.setItem('dhanbari_donors', JSON.stringify(donors));
+            alert('সফলভাবে আপনার রক্তদাতা তথ্য রেজিস্ট্রি করা হয়েছে!');
+            closeModal('addDonorModal');
+            document.getElementById('donorForm').reset();
+            renderDonors('ALL');
+        }
+
+        function handleBusSubmit(e) {
+            e.preventDefault();
+            const newReview = {
+                id: Date.now(),
+                bus: document.getElementById('busName').value,
+                rating: parseInt(document.getElementById('busRating').value),
+                user: document.getElementById('reviewerName').value,
+                comment: document.getElementById('busComment').value
+            };
+            busReviews.unshift(newReview);
+            localStorage.setItem('dhanbari_bus_reviews', JSON.stringify(busReviews));
+            alert('আপনার বাস রিভিউটি সফলভাবে প্রকাশিত হয়েছে!');
+            closeModal('addBusReviewModal');
+            document.getElementById('busForm').reset();
+            renderBusReviews();
+        }
+
+        // Admin Security & Dashboard
+        function openAdminLogin() { openModal('adminLoginModal'); }
+
+        function verifyAdmin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPasswordInput').value;
+            // Password set to user specified Tannibir6112
+            if(pass === 'Tannibir6112') {
+                closeModal('adminLoginModal');
+                document.getElementById('adminPasswordInput').value = '';
+                openAdminDashboard();
+            } else {
+                alert('ভুল পাসওয়ার্ড! দয়া করে সঠিক পাসওয়ার্ড দিন।');
+            }
+        }
+
+        function openAdminDashboard() {
+            document.getElementById('editSiteTitle').value = siteBranding.title;
+            document.getElementById('editSiteSubtitle').value = siteBranding.brandSubtitle;
+            document.getElementById('editTopTicker').value = siteBranding.ticker;
+            renderAdminManagementList();
+            document.getElementById('adminDashboardModal').classList.remove('hidden');
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('adminDashboardModal').classList.add('hidden');
+        }
+
+        function saveBranding(e) {
+            e.preventDefault();
+            siteBranding.title = document.getElementById('editSiteTitle').value;
+            siteBranding.brandTitle = document.getElementById('editSiteTitle').value.split('-')[0].trim();
+            siteBranding.brandSubtitle = document.getElementById('editSiteSubtitle').value;
+            siteBranding.ticker = document.getElementById('editTopTicker').value;
+            
+            localStorage.setItem('dhanbari_branding', JSON.stringify(siteBranding));
+            applyBranding();
+            alert('ওয়েবসাইটের ব্র্যান্ডিং ও তথ্য সফলভাবে আপডেট করা হয়েছে!');
+        }
+
+        function publishNotice(e) {
+            e.preventDefault();
+            const newNotice = {
+                id: Date.now(),
+                title: document.getElementById('noticeTitle').value,
+                date: document.getElementById('noticeDate').value,
+                desc: document.getElementById('noticeDesc').value
+            };
+            notices.unshift(newNotice);
+            localStorage.setItem('dhanbari_notices', JSON.stringify(notices));
+            renderNotices();
+            alert('নতুন নোটিশ সফলভাবে পাবলিশ করা হয়েছে!');
+            document.getElementById('noticeTitle').value = '';
+            document.getElementById('noticeDate').value = '';
+            document.getElementById('noticeDesc').value = '';
+            renderAdminManagementList();
+        }
+
+        function renderAdminManagementList() {
+            const listDiv = document.getElementById('admin-management-list');
+            listDiv.innerHTML = '<h4 class="text-sm font-bold text-slate-700 mb-2">প্রকাশিত নোটিশসমূহ:</h4>';
+            
+            if(notices.length === 0) {
+                listDiv.innerHTML += `<p class="text-xs text-slate-500">কোনো নোটিশ নেই।</p>`;
+            }
+
+            notices.forEach(n => {
+                listDiv.innerHTML += `
+                    <div class="bg-white p-3 rounded-lg border flex justify-between items-center text-sm">
+                        <div>
+                            <span class="font-bold text-slate-800">${n.title}</span>
+                            <span class="text-xs text-slate-400 ml-2">(${n.date})</span>
+                        </div>
+                        <button onclick="deleteNotice(${n.id})" class="bg-rose-50 text-rose-600 px-3 py-1 rounded text-xs font-bold hover:bg-rose-600 hover:text-white transition">ডিলিট</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteNotice(id) {
+            if(confirm('নাকি এই নোটিশটি ডিলিট করতে চান?')) {
+                notices = notices.filter(n => n.id !== id);
+                localStorage.setItem('dhanbari_notices', JSON.stringify(notices));
+                renderNotices();
+                renderAdminManagementList();
+            }
+        }
+    </script>
+</body>
+</html>
